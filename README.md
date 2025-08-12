@@ -1,4 +1,5 @@
 ReDeal
+
 A Django-based web application for buying and selling second-hand items. Users can browse, search, and list items across various categories in a user-friendly marketplace environment.
 
 🚀 Features
