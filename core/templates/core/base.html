@@ -1,0 +1,80 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <title>{%block title%}{%endblock%} | ReDeal</title>
+  </head>
+
+  <!-- This is the base template for ReDeal, a Django project. It includes a navigation bar and blocks for content. -->
+  <body>
+    <nav
+      class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+      <a href="/" class="text-4xl font-semibold">ReDeal </a>
+      <div>
+        <a href="{% url 'item:new' %}"
+          class="text-lg font-semibold hover:text-gray-500">New item</a>
+        <a href="{% url 'item:items'  %}"
+          class="ml-6 text-lg font-semibold hover:text-gray-500">Browse</a>
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'conversation:inbox'%}"
+          class="ml-6 px-4 py-2 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-tea-700">Inbox</a>
+        <a href="{% url 'dashboard:index'%}"
+          class="ml-6 px-4 py-2 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-tea-700">Dashboard</a>
+
+        <!-- Logout -->
+        <form action="{% url 'core:logout' %}" method="post" class="inline">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="ml-6 px-4 py-2 text-base font-semibold bg-red-500 text-white rounded-xl hover:bg-red-600">Logout
+          </button>
+        </form>
+
+        {% else %}
+        <a href="{% url 'core:signup' %}"
+          class="ml-6 px-4 py-2 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-tea-700">Sign up</a>
+        <a href="{% url 'core:login' %}"
+          class="ml-6 px-4 py-2 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-tea-700">Log in</a>
+
+        {% endif %}
+      </div>
+    </nav>
+    <div class="px-6 py-6">{% block content %} {% endblock%}</div>
+
+    <!-- Footer Section -->
+    <footer class="py-6 px-6 flex justify-between bg-gray-800">
+      <div class="w-2/3 pr-10">
+        <h3 class="mb-5 font-semibold text-gray-400 text-lg">ReDeal</h3>
+        <p class="text-sm text-gray-500">
+          © 2025. All rights reserved. ReDeal Technologies
+        </p>
+      </div>
+
+      <div class="w-1/3">
+        <ul class="space-y-2">
+          <li>
+            <a href="{% url 'core:about' %}"
+              class="text-lg font-semibold text-gray-500 hover:text-teal-700">About</a>
+          </li>
+          <li>
+            <a href="{% url 'core:contact' %}"
+              class="text-lg font-semibold text-gray-500 hover:text-teal-700">Contact</a>
+          </li>
+          <li>
+            <a href="{% url 'core:terms' %}"
+              class="text-lg font-semibold text-gray-500 hover:text-teal-700">Terms and Conditions</a>
+          </li>
+          <li>
+            <a href="{% url 'core:privacy' %}"
+              class="text-lg font-semibold text-gray-500 hover:text-teal-700">Privacy policy</a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
