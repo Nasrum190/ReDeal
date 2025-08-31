@@ -14,7 +14,6 @@ Advanced Search: Search items by name, category, and other filters
 
 Image Upload: Upload and display item images
 
-Responsive Design: Mobile-friendly interface using Tailwind CSS
 
 User Dashboard: Manage personal listings and account settings
 
